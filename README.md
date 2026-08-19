@@ -236,6 +236,7 @@ lib/scoring.js         deterministic scoring
 lib/sandbox.js         runs model-written code against tests
 lib/runner.js          the run matrix and aggregation
 lib/inventory.js       blob-aware disk accounting
+lib/load.js            loads your .local.js overrides
 lib/store.js           saves runs as JSON
 benchmarks/            the cases, one file per battery
 public/                the UI
