@@ -1,0 +1,13 @@
+{
+  "name": "localmodelbench",
+  "version": "1.0.0",
+  "description": "A local scoreboard for local models. Benchmarks every model in your Ollama install on tool calling, coding and general intelligence, and shows what each one actually costs you in disk space.",
+  "type": "module",
+  "bin": { "localmodelbench": "server.js" },
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "keywords": ["ollama", "llm", "benchmark", "local-llm", "evaluation", "tool-calling", "eval"],
+  "license": "MIT",
+  "dependencies": {},
+  "files": ["server.js", "lib/", "benchmarks/", "public/", "README.md", "LICENSE"]
+}

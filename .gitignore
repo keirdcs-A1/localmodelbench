@@ -1,0 +1,11 @@
+# Saved runs and your own scores stay on your machine.
+results/*.json
+
+node_modules/
+.DS_Store
+*.log
+*.tgz
+
+# Your own fixtures and cases. Never pushed.
+lib/fixtures.local.js
+benchmarks/*.local.js

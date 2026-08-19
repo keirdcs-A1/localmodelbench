@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ModelBench</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%232a78d6%22/></svg>">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+  <h1>ModelBench</h1>
+  <span class="sub" id="host">connecting…</span>
+  <span class="spacer"></span>
+  <button class="ghost" id="theme" type="button">Dark / light</button>
+</header>
+
+<nav role="tablist">
+  <button role="tab" data-tab="run" aria-selected="true">Run</button>
+  <button role="tab" data-tab="scoreboard" aria-selected="false">Scoreboard</button>
+  <button role="tab" data-tab="score" aria-selected="false">Score answers</button>
+  <button role="tab" data-tab="inventory" aria-selected="false">Inventory</button>
+  <button role="tab" data-tab="benchmarks" aria-selected="false">Benchmarks</button>
+</nav>
+
+<main>
+  <!-- ---------------- RUN ---------------- -->
+  <section id="tab-run">
+    <div id="run-warning"></div>
+    <div id="local-banner"></div>
+    <div class="card">
+      <h2>What to run</h2>
+      <p class="hint">Runs are sequential on purpose. Two models loaded at once compete for unified memory and the
+        tokens per second figures stop meaning anything.</p>
+      <div class="grid">
+        <fieldset><legend>Models</legend><div id="pick-models"><p class="empty">Loading…</p></div></fieldset>
+        <fieldset><legend>Batteries</legend><div id="pick-batteries"></div></fieldset>
+        <fieldset><legend>Difficulty tiers</legend><div id="pick-tiers"></div></fieldset>
+        <fieldset><legend>Reasoning effort</legend><div id="pick-efforts"></div></fieldset>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button class="primary" id="start">Run benchmark</button>
+        <button class="ghost" id="cancel" hidden>Stop</button>
+        <span class="muted" id="estimate"></span>
+      </div>
+    </div>
+    <div class="card" id="progress-card" hidden>
+      <h2>Progress</h2>
+      <div class="progress"><div id="progress-bar" style="width:0%"></div></div>
+      <p class="muted" id="progress-text"></p>
+      <div class="tablewrap"><table><thead><tr>
+        <th>Model</th><th>Battery</th><th>Case</th><th>Effort</th><th>Score</th><th>Notes</th>
+      </tr></thead><tbody id="progress-rows"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- ---------------- SCOREBOARD ---------------- -->
+  <section id="tab-scoreboard" hidden>
+    <div class="card">
+      <div class="row">
+        <h2 style="margin:0">Results</h2>
+        <span class="spacer" style="flex:1"></span>
+        <select id="run-picker" style="font:inherit;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface-1);color:var(--text-primary)"></select>
+      </div>
+    </div>
+    <div id="scoreboard-body"><p class="empty">No runs yet. Start one on the Run tab.</p></div>
+  </section>
+
+  <!-- ---------------- BLIND SCORING ---------------- -->
+  <section id="tab-score" hidden>
+    <div class="card">
+      <h2>Score answers blind</h2>
+      <p class="hint">The model's name is hidden until you have scored the answer, so you cannot favour the one you
+        expected to win. Deterministic checks are already applied; this is the judgement half.</p>
+      <div class="row"><span class="muted" id="score-progress"></span></div>
+    </div>
+    <div id="score-body"><p class="empty">Nothing waiting to be scored.</p></div>
+  </section>
+
+  <!-- ---------------- INVENTORY ---------------- -->
+  <section id="tab-inventory" hidden>
+    <div class="card">
+      <h2>What is on disk</h2>
+      <p class="hint">Derived models share their layers with the base they were built from, so adding up what Ollama
+        reports badly overcounts. <strong>Reclaimable</strong> is what deleting that model would actually free.</p>
+      <div class="grid" id="inventory-stats"></div>
+    </div>
+    <div class="card"><div class="tablewrap"><table><thead><tr>
+      <th>Model</th><th>Built from</th><th>Used for</th><th class="num">On disk</th><th class="num">Reclaimable</th><th>Shares layers with</th>
+    </tr></thead><tbody id="inventory-rows"></tbody></table></div></div>
+  </section>
+
+  <!-- ---------------- BENCHMARKS ---------------- -->
+  <section id="tab-benchmarks" hidden>
+    <div class="card">
+      <h2>The batteries</h2>
+      <p class="hint">Tool calling and coding are scored mechanically: which tool with which arguments, and whether the
+        code passes its unit tests. General intelligence mixes automatic checks with your own blind scoring.</p>
+    </div>
+    <div id="benchmarks-body"></div>
+  </section>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>
