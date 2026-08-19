@@ -12,7 +12,7 @@ not the number `ollama list` shows you.
 No dependencies. No build step. No account. Nothing leaves your machine.
 
 ```
-git clone https://github.com/YOUR-USERNAME/localmodelbench.git
+git clone https://github.com/keirdcs-A1/localmodelbench.git
 cd localmodelbench
 node server.js
 ```
